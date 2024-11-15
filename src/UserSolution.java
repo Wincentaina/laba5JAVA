@@ -1,12 +1,11 @@
-public class UserSolution {
-    private final String solutionCode; // Код решения пользователя
+class UserSolution {
+    private final String solutionCode;
 
-    // Конструктор
     public UserSolution(String solutionCode) {
         this.solutionCode = solutionCode;
     }
 
     public String getSolutionCode() {
-        return solutionCode;
+        return this.solutionCode; // Используем this
     }
 }

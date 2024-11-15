@@ -2,8 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-
-    // Метод для симуляции выполнения теста
     public static ExecutionResult runTestCase(UserSolution solution, TestCase test) {
         ExecutionResult result = new ExecutionResult();
         result.setActualOutput(test.getInput()); // Симуляция выполнения решения
@@ -11,19 +9,6 @@ public class Main {
         return result;
     }
 
-    // Метод для выполнения всех тестов
-    public static TestRun runAllTests(UserSolution solution, TestSuite suite) {
-        TestRun run = new TestRun(suite);
-
-        for (int i = 0; i < suite.getTestCount(); i++) {
-            ExecutionResult result = runTestCase(solution, suite.getTests().get(i));
-            run.getResults().set(i, result);
-        }
-
-        return run;
-    }
-
-    // Метод для проверки решения пользователя
     public static Submission checkSolution(UserSolution solution, Task task) {
         Submission submission = new Submission(solution, task.getTestSuite().getTestCount());
 
@@ -41,29 +26,35 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        TestCase test1 = new TestCase("input1", "input1");
-        TestCase test2 = new TestCase("input2", "expected2");
+        try {
+            TestCase test1 = new TestCase("input1", "input1");
+            TestCase test2 = new TestCase("input2", "expected2");
 
-        // Создаем список тестов и набор тестов
-        List<TestCase> tests = new ArrayList<>();
-        tests.add(test1);
-        tests.add(test2);
+            List<TestCase> tests = new ArrayList<>();
+            tests.add(test1);
+            tests.add(test2);
 
-        TestSuite suite = new TestSuite(tests);
+            TestSuite suite = new TestSuite(tests);
 
-        // Создание задачи
-        Task task = new Task("Example Task", suite);
+            Task task = new Task("Example Task", suite);
+            UserSolution solution = new UserSolution("user_solution_code");
 
-        // Решение пользователя
-        UserSolution solution = new UserSolution("user_solution_code");
+            Submission submission = checkSolution(solution, task);
 
-        // Запуск проверки решения
-        Submission submission = checkSolution(solution, task);
+            System.out.println("Total tests passed: " + submission.getTotalPassed() + " out of " + suite.getTestCount());
+            for (int i = 0; i < suite.getTestCount(); i++) {
+                System.out.println("Test " + (i + 1) + ": " + (submission.getResults().get(i).getIsPassed() ? "Passed" : "Failed"));
+            }
 
-        // Вывод результатов
-        System.out.println("Total tests passed: " + submission.getTotalPassed() + " out of " + suite.getTestCount());
-        for (int i = 0; i < suite.getTestCount(); i++) {
-            System.out.println("Test " + (i + 1) + ": " + (submission.getResults().get(i).getIsPassed() ? "Passed" : "Failed"));
+            System.out.println("Total Test Suites Created: " + TestSuite.getTotalTestSuitesCreated());
+
+            // Исключение для проверки работы try-catch
+            if (submission.getTotalPassed() < suite.getTestCount()) {
+                throw new IllegalArgumentException("Not all tests passed");
+            }
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Caught an exception: " + e.getMessage());
         }
     }
 }

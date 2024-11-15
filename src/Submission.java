@@ -1,17 +1,16 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Submission {
-    private final UserSolution solution;        // Решение пользователя
-    private final List<ExecutionResult> results; // Результаты выполнения тестов
-    private int totalPassed;                    // Общее количество пройденных тестов
+class Submission {
+    private final UserSolution solution;
+    private final List<ExecutionResult> results;
+    private int totalPassed;
 
-    // Конструктор
     public Submission(UserSolution solution, int testCount) {
         this.solution = solution;
         this.results = new ArrayList<>(testCount);
         for (int i = 0; i < testCount; i++) {
-            results.add(new ExecutionResult()); // Инициализация результатов
+            results.add(new ExecutionResult());
         }
         this.totalPassed = 0;
     }
@@ -29,6 +28,6 @@ public class Submission {
     }
 
     public UserSolution getSolution() {
-        return solution;
+        return this.solution; // Используем this
     }
 }

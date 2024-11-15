@@ -1,8 +1,7 @@
-public class ExecutionResult {
-    private String actualOutput; // Фактический результат выполнения
-    private boolean isPassed;    // Успешность прохождения теста
+class ExecutionResult {
+    private String actualOutput;
+    private boolean isPassed;
 
-    // Конструктор по умолчанию
     public ExecutionResult() {
         this.isPassed = false;
     }
