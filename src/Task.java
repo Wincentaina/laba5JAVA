@@ -1,18 +1,17 @@
-public class Task {
-    private final String description; // Описание задачи
-    private final TestSuite testSuite; // Набор тестов для задачи
+class Task {
+    private final String description;
+    private final TestSuite testSuite;
 
-    // Конструктор
     public Task(String description, TestSuite testSuite) {
         this.description = description;
         this.testSuite = testSuite;
     }
 
     public String getDescription() {
-        return description;
+        return this.description; // Используем this
     }
 
     public TestSuite getTestSuite() {
-        return testSuite;
+        return this.testSuite; // Используем this
     }
 }

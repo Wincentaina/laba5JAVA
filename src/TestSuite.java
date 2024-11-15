@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestSuite {
-    private final List<TestCase> tests;    // Список тестов
+class TestSuite {
+    private static int totalTestSuitesCreated = 0; // Статическое поле
+    private final List<TestCase> tests;
 
-    // Конструктор
     public TestSuite(List<TestCase> tests) {
-        this.tests = new ArrayList<>(tests); // Создаем копию переданного списка для безопасности
+        this.tests = new ArrayList<>(tests);
+        totalTestSuitesCreated++;
     }
 
     public List<TestCase> getTests() {
@@ -15,5 +16,9 @@ public class TestSuite {
 
     public int getTestCount() {
         return tests.size();
+    }
+
+    public static int getTotalTestSuitesCreated() {
+        return totalTestSuitesCreated;
     }
 }

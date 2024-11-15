@@ -1,18 +1,20 @@
-public class TestCase {
-    private final String input;    // Входные данные для теста
-    private final String expected; // Ожидаемый результат
+import java.util.ArrayList;
+import java.util.List;
 
-    // Конструктор
+class TestCase {
+    private final String input;
+    private final String expected;
+
     public TestCase(String input, String expected) {
         this.input = input;
         this.expected = expected;
     }
 
     public String getInput() {
-        return input;
+        return this.input; // Используем this
     }
 
     public String getExpected() {
-        return expected;
+        return this.expected; // Используем this
     }
 }
